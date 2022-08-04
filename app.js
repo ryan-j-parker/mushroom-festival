@@ -46,51 +46,65 @@ addMushroomButton.addEventListener('click', () => {
 
 addFriendButton.addEventListener('click', () => {
     // get the name from the input
-    newFriend.name = friendInputEl.value;
+    const newFriendName = friendInputEl.value;
     // create a new friend object
-    
-    const friend = {
-        name: name,
-        emoji: emoji
+
+    let newFriend = {
+        name: newFriendName,
+        satisfaction: 1
     };
-    
-    for (let friend of friendsEl) {
-        renderFriend(friend);
-        friendsEl.append(friend);
-    }
+
+    friendData.push(newFriend);
+
     // push it into the friends state array, passed in as an argument
-    friendsEl.push(friend);
+
     // reset the input
-    friendInputEl.textContent = '';
+
     // display all the friends (use a function here)
     displayFriends();
-    
+    friendInputEl.textContent = '';
     console.log(friendData);
     debugger;
 });
 
 function displayFriends() {
     // clear out the friends in DOM
-
+    friendsEl.textContent = '';
     // for each friend in state . . .
+
     for (let friend of friendData) {
-        // use renderFriend to make a friendEl
+        const aFriend = renderFriend(friend);
 
-        // this is a clickable list, so . . .
-        //     add an event listener to each friend
-        //         and if the friend's satisfaction level is below 3 and you have mushrooms left
-        //             increment the friends satisfaction and decrement your mushrooms
-        //             then display your friends and mushrooms with the updated state
+        aFriend.addEventListener('click', () => {
+            if (friend.satisfaction < 3) {
+                friend.satisfaction++;
+                mushroomCount--;
+            }
+            
+            displayFriends();
+            displayMushrooms();
+        });
 
-        // append the friendEl to the friends list in DOM
+        friendsEl.append(aFriend);
     }
+
+    // use renderFriend to make a friendEl
+
+    // this is a clickable list, so . . .
+    //     add an event listener to each friend
+    //         and if the friend's satisfaction level is below 3 and you have mushrooms left
+    //             increment the friends satisfaction and decrement your mushrooms
+    //             then display your friends and mushrooms with the updated state
+
+    // append the friendEl to the friends list in DOM
 }
+
 
 function displayMushrooms() {
     // clear out the mushroom div
     mushroomsEl.textContent = '';
 
-   for (let i = 0; i < mushroomCount; i++) {
+    for (let i = 0; i < mushroomCount; i++) {
         // for each mushroom in your mushroom state, render and append a mushroom
         const mushroom = document.createElement('div');
         mushroom.classList.add('mushroom');
