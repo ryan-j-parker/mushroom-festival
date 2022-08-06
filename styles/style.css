@@ -175,7 +175,7 @@ footer {
     transition: all .1s ease-in-out;
     cursor: pointer;
     box-shadow: var(--shadow);
-    transform: rotate(8deg);
+    transform: rotate(3deg);
     background-color: lightblue;
 }  
 
