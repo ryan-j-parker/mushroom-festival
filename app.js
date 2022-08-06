@@ -1,4 +1,3 @@
-// import functions and grab DOM elements
 import { renderMushroom, renderFriend } from './render-utils.js';
 
 const friendsEl = document.querySelector('.friends');
@@ -43,8 +42,8 @@ addMushroomButton.addEventListener('click', () => {
 });
 
 addFriendButton.addEventListener('click', () => {
-    // get the name from the input
-    let newFriendName = friendInputEl.value || 'Friendo';
+
+    let newFriendName = friendInputEl.value || 'Friendo' + Math.floor(Math.random() * 1000);
 
     let newFriend = {
         name: newFriendName,
@@ -75,7 +74,7 @@ function displayFriends() {
             }
 
             else if (friend.satisfaction === 3) {
-                alert(`${friend.name}'s had plenty of mushrooms already! Try sharing with someone else, or invite a new friend!`);
+                alert(`${friend.name}'s had plenty of mushrooms already! Try sharing with someone else, or invite a new friend to share with!`);
             }
             
             displayFriends();
